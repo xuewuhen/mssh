@@ -82,22 +82,14 @@ Report bugs to https://github.com/xuewuhen/mssh
 
 > 程序所有选项如下:
 
-   -f     input file(include ip|username|password|cmd)
-
-   -cmd      shell cmds or shell scripts   cdf
-
-   -cfg     mssh config file default for mssh.conf
-
-   -s     shell mode switch default for false
-
-   -n     the number of goroutines default for 100
-
-   -rand     random password mode
-
-   -m     send mail switch default for false
-
-   -v     show details
-
+       -f     input file(include ip|username|password|cmd)
+    -cmd      shell cmds or shell scripts   cdf
+    -cfg     mssh config file default for mssh.conf
+    -s     shell mode switch default for false
+    -n     the number of goroutines default for 100
+    -rand     random password mode
+    -m     send mail switch default for false
+    -v     show details
 解析顺序：
 命令行选项 >  配置文件
 
@@ -272,27 +264,20 @@ file 文件格式5
 
 ##4、执行结果显示
 
-./mssh -f ip1 -m 
-
-**************************************** [ 1 ] ****************************************
-
-192.168.100.1:
-
-ok
-
-
-**************************************** [ 2 ] ****************************************
-
-192.168.100.2:
-
-ok
-
-
-**************************************** [ 3 ] ****************************************
-
-192.168.100.3:
-
-ok
+    ./mssh -f ip1 -m 
+    **************************************** [ 1 ] ****************************************
+    192.168.100.1:
+    ok
+    
+    
+    **************************************** [ 2 ] ****************************************
+    192.168.100.2:
+    ok
+    
+    
+    **************************************** [ 3 ] ****************************************
+    192.168.100.3:
+    ok
 
 
 
