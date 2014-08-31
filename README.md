@@ -290,6 +290,7 @@ run time: 301.368036ms
 
  - 配置go环境
  - go get -u github.com/xuewuhen/mssh
+ - cd $GOPATH/github.com/xuewuhen/mssh
  - mkdir $GOPATH/src/crypto.go
  - mv ssh $GOPATH/src/crypto.go/
  - go install or go build
