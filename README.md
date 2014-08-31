@@ -156,45 +156,27 @@ Report bugs to https://github.com/xuewuhen/mssh
 
 配置文件格式如下：
 
-;main config section
-[main]
-username=root
-password=rootpass
-command=echo ok
-;ssh timeout default 30s
-timeout=30
-
-
-;crypto config section
-[crypto]
-
-
-;mail config section
-[mail]
-title=mssh
-body=mssh exec task
-mode=text
-;multiple users divided by semicolon
-maillist=
-fr_addr=xxx@xxx
-
-
-[main] //主配置部分
-username=root //指定以什么用户到目标机器执行命令，默认是root
-password=rootpass //username对应的密码，默认先使用信任关系，如果没有信任关系则采用密码
-command=echo ok //在目标机器上面指定的命令，默认是echo ok，可以修改为任意命令
-timeout=30  //配置ssh超时值，默认超时时间是30s，请根据需要自行调整
-
-[crypto] //加密配置部分
-暂时不支持
-
-[mail] //邮件配置部分
-title=mssh //邮件标题
-body=mssh exec task  //邮件主体
-mode=text  //邮件模式，支持text和html
-maillist=  //邮件接收人，默认为空，多个邮件接收人之间使用";"分隔
-fr_addr=xxx@xxx  //邮件发送人地址
-
+    ;main config section
+    [main]
+    username=root
+    password=rootpass
+    command=echo ok
+    ;ssh timeout default 30s
+    timeout=30
+    
+    
+    ;crypto config section
+    [crypto]
+    
+    
+    ;mail config section
+    [mail]
+    title=mssh
+    body=mssh exec task
+    mode=text
+    ;multiple users divided by semicolon
+    maillist=
+    fr_addr=xxx@xxx
 注:
 发送邮件选项仅-m开启的时候才生效。
 
@@ -206,25 +188,31 @@ fr_addr=xxx@xxx  //邮件发送人地址
 
 ./mssh -f file -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh"
 
+
 执行命令，命令结果输出到终端，并且将执行命令出错的机器列表发送给当前登录用户
 
 ./mssh -f file -m -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh"
+
 
 重定向标准输出和标准错误到文件
 
 ./mssh -f file -m -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh" 1> `date %F`.log.txt 2>  `date %F`.err.txt
 
+
 后台运行，并且将正常输出和错误输出到文件，方便后续查看
 
 nohup ./mssh -f file -m -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh" 1> `date %F`.log.txt 2>  `date %F`.err.txt &
+
 
 执行shell脚本
 
 ./mssh -f file -m -s -cmd tmp.sh
 
+
 执行命令(注意，mssh的非-参数，会被当成cmd的参数)
 
 ./mssh -f file -cmd "ls -al" /tmp /root
+
 
 执行默认命令(echo ok)
 
@@ -236,30 +224,47 @@ nohup ./mssh -f file -m -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/x
 ./mssh -f file
 
 file 文件格式1
+
 10.1.1.1
+
 10.1.1.2
 
+
 file 文件格式2
+
 10.1.1.1 root
+
 10.1.1.2 guest
 
+
 file 文件格式3
+
 10.1.1.1 root rootpass
+
 10.1.1.2 guest guestpass
 
+
 file 文件格式4
+
 10.1.1.1 root rootpass ls -al
+
 10.1.1.2 guest guestpass  echo ok
 
+
 file 文件格式5
+
 10.1.1.1 root rootpass
+
 10.1.1.2 guest guestpass  echo ok
+
 10.1.1.3  
+
 10.1.1.4 root
 
 如果相关字段missing，那么将会使用配置文件的配置。
 
 如：file 文件格式5 中 10.1.1.3 用户名、用户名密码、命令missing，
+
 那么对应默认值为10.1.1.3 root rootpass echo ok
 
 
@@ -268,23 +273,31 @@ file 文件格式5
 ##4、执行结果显示
 
 ./mssh -f ip1 -m 
+
 **************************************** [ 1 ] ****************************************
+
 192.168.100.1:
+
 ok
 
 
 **************************************** [ 2 ] ****************************************
+
 192.168.100.2:
+
 ok
 
 
 **************************************** [ 3 ] ****************************************
+
 192.168.100.3:
+
 ok
 
 
 
 send mail successful
+
 run time: 301.368036ms
 
 
