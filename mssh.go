@@ -9,6 +9,7 @@ import (
 	"mssh/helper"
 	"mssh/sshutils"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -20,7 +21,7 @@ import (
 )
 
 const (
-	APP_VER = "0.1.3"
+	APP_VER = "0.1.5"
 )
 
 const confTpl = `
