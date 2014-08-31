@@ -288,6 +288,10 @@ func main() {
 
 	wg2.Wait()
 
+	//kill ssh process which is timeout
+	vprintf("Kill ssh for timeout\n")
+	kill(sshutils.Cmds)
+
 	errMsg := buf.String()
 	htmlErrMsg := strings.Replace(errMsg, "\n", "<br>", -1)
 	now := time.Now().String()
@@ -386,5 +390,27 @@ func version() {
 func vprintf(format string, a ...interface{}) {
 	if *verbose {
 		fmt.Printf(format, a...)
+	}
+}
+
+func kill(s []*exec.Cmd) {
+	defer func() {
+		if e := recover(); e != nil {
+			fmt.Println("Kill.recover -> ", e)
+		}
+	}()
+
+	if len(s) == 0 {
+		return
+	}
+
+	for _, v := range s {
+		if v != nil && v.Process != nil {
+			if err := v.Process.Kill(); err != nil {
+				vprintf("Kill -> %v\n", err)
+			} else {
+				vprintf("Kill -> %#v succ\n", v)
+			}
+		}
 	}
 }
