@@ -82,7 +82,7 @@ Report bugs to https://github.com/xuewuhen/mssh
 
 > 程序所有选项如下:
 
-       -f     input file(include ip|username|password|cmd)
+    -f     input file(include ip|username|password|cmd)
     -cmd      shell cmds or shell scripts   cdf
     -cfg     mssh config file default for mssh.conf
     -s     shell mode switch default for false
