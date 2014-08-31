@@ -82,21 +82,21 @@ Report bugs to https://github.com/xuewuhen/mssh
 
 > 程序所有选项如下:
 
--f     input file(include ip|username|password|cmd)
+   -f     input file(include ip|username|password|cmd)
 
--cmd      shell cmds or shell scripts   cdf
+   -cmd      shell cmds or shell scripts   cdf
 
--cfg     mssh config file default for mssh.conf
+   -cfg     mssh config file default for mssh.conf
 
--s     shell mode switch default for false
+   -s     shell mode switch default for false
 
--n     the number of goroutines default for 100
+   -n     the number of goroutines default for 100
 
--rand     random password mode
+   -rand     random password mode
 
--m     send mail switch default for false
+   -m     send mail switch default for false
 
--v     show details
+   -v     show details
 
 解析顺序：
 命令行选项 >  配置文件
