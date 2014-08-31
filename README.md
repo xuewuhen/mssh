@@ -1,15 +1,12 @@
 
-#mssh
-====
-
-**mssh is a tool for batching execute ssh commands.**
-
 #mssh使用帮助
 
 ##1、工具介绍
 
 > mssh是一个批量远程ssh执行命令的工具。 它具有稳定、高效、准确，执行灵活方便，可以大幅度提高日常工作效率。
+
 > 它的思想是：只用给它提供执行命令或者脚本和指定需要执行命令的机器列表，批量在指定机器上执行命令并返回执行命令的结果（包括执行失败的结果），并且邮件告知执行失败情况。
+
 > 这样就可以只用专注于脚本的编写，不用考虑在多台机器上面批量执行。
 
 ##2、对比传统ssh命令
@@ -72,9 +69,13 @@ Usage:
 
 ###3.2
 ./mssh version 查看版本信息
+
 mssh version 0.1.5
+
 Powered by xuewuhen2015@gmail.com
+
 Copyright @2014 xuewuhen
+
 Report bugs to https://github.com/xuewuhen/mssh
 
 ###3.3
@@ -82,12 +83,19 @@ Report bugs to https://github.com/xuewuhen/mssh
 > 程序所有选项如下:
 
 -f     input file(include ip|username|password|cmd)
+
 -cmd      shell cmds or shell scripts   cdf
+
 -cfg     mssh config file default for mssh.conf
+
 -s     shell mode switch default for false
+
 -n     the number of goroutines default for 100
+
 -rand     random password mode
+
 -m     send mail switch default for false
+
 -v     show details
 
 解析顺序：
@@ -95,45 +103,59 @@ Report bugs to https://github.com/xuewuhen/mssh
 
 ####3.3.1
 ./mssh -f file  
+
 -f file 指定ip列表文件，每个一行，此选项必须指定，否则程序会退出。
+
 其他选项若不指定,将会使用默认选项。
 
 ####3.3.2
 ./mssh -f file -cmd commands
+
 -cmd 指定需要在远程机器上面执行的命令，如date等，如果不指定该选项默认使用配置文件里面的命令（echo ok）
 
 ####3.3.3
 ./mssh -f file -cfg conf
+
 -cfg conf 指定mssh的配置文件，默认使用当前目录下的mssh.conf作为配置文件
+
 此选项适合在多个配置文件之间切换的情况。
 
 ####3.3.4
 ./mssh -f file -s -cmd tmp.sh
+
 -s 开启shell mode，可以远程执行shell scripts，此选项需要与-cmd xxx.sh配合使用
+
 一般情况下不推荐使用，因为会影响执行速度
 
 ####3.3.5
 ./mssh -f file -n 100
+
 -n num 指定mssh的开启的线程数量，默认是100，最小为1，最大为10000。
 
 ####3.3.6
 ./mssh -f file -rand
+
 -rand 随机密码模式，需要与file里面的特定字段配合使用。
+
 一般情况不会用到。
 
 ####3.3.7
 ./mssh -f file -m -cmd commands
+
 -m 开启发送邮件模式，如果配置文件mssh.conf里面指定了maillist=xxx，那么执行命令失败的主机ip或域名会发送给
 相应的maillist。如果没有指定maillist，那么将会发送给当前登录中控的用户（如登录用户是xxx，那么邮件将会发送给xxx@xxx.com)。
 
 ####3.3.8
 ./mssh -f file -v
 -v 开启调试模式，将会显示详细的debug信息。
+
 在某些情况下，对于调试命令执行失败非常有效。
 
 ####3.3.9
 关于配置文件说明
+
 配置文件格式如下：
+
 ;main config section
 [main]
 username=root
@@ -181,24 +203,31 @@ fr_addr=xxx@xxx  //邮件发送人地址
 一些常见的用法：
 
 执行命令，命令结果输出到终端
+
 ./mssh -f file -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh"
 
 执行命令，命令结果输出到终端，并且将执行命令出错的机器列表发送给当前登录用户
+
 ./mssh -f file -m -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh"
 
 重定向标准输出和标准错误到文件
+
 ./mssh -f file -m -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh" 1> `date %F`.log.txt 2>  `date %F`.err.txt
 
 后台运行，并且将正常输出和错误输出到文件，方便后续查看
+
 nohup ./mssh -f file -m -cmd "wget -O /tmp/xxx.sh http://xxx/xxx.sh && sh /tmp/xxx.sh" 1> `date %F`.log.txt 2>  `date %F`.err.txt &
 
 执行shell脚本
+
 ./mssh -f file -m -s -cmd tmp.sh
 
 执行命令(注意，mssh的非-参数，会被当成cmd的参数)
+
 ./mssh -f file -cmd "ls -al" /tmp /root
 
 执行默认命令(echo ok)
+
 ./mssh -f file
 
 
