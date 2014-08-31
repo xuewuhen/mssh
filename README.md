@@ -1,47 +1,52 @@
-mssh
+
+#mssh
 ====
 
-mssh is a tool for batching execute ssh commands.
+**mssh is a tool for batching execute ssh commands.**
 
 #mssh使用帮助
 
 ##1、工具介绍
-mssh是一个批量远程ssh执行命令的工具。最新版下载地址: http://10.136.131.210:8888/mssh，已经经过大量测试，目前已经成熟。
-它具有稳定、高效、准确，执行灵活方便，可以大幅度提高日常工作效率。
-它的思想是：大家只用给它提供执行命令或者脚本和指定需要执行命令的机器列表，批量在指定机器上执行命令并返回执行命令的结果（包括执行失败的结果），并且邮件告知执行失败情况。
-这样大家可以只用专注于脚本的编写，不用考虑在多台机器上面批量执行。
-希望该工具对大家有所帮助。
+
+> mssh是一个批量远程ssh执行命令的工具。 它具有稳定、高效、准确，执行灵活方便，可以大幅度提高日常工作效率。
+> 它的思想是：只用给它提供执行命令或者脚本和指定需要执行命令的机器列表，批量在指定机器上执行命令并返回执行命令的结果（包括执行失败的结果），并且邮件告知执行失败情况。
+> 这样就可以只用专注于脚本的编写，不用考虑在多台机器上面批量执行。
 
 ##2、对比传统ssh命令
-对比传统的ssh命令优势：
-1、     go语言编写，使用最新的go语言ssh包
-2、     支持多线程
-3、     原生ssh协议支持，支持密码、证书认证
-4、     支持超时（各种密码错误，内存爆，网络不通，登录异常不能登录情况，不会中断批量执行）
-5、     支持发送电子邮件告知执行结果
-6、     采用ssh做认证，更安全
-7、     内存占用少
-8、     支持不同机器同时执行不同命令或者同台机器同时执行不同命令
-9、     执行速度非常快
-10、	  可以自定义超时时间
-11、	  支持配置文件和命令行选项
+
+> 对比传统的ssh命令优势：
+
+ 1. go语言编写，使用最新的go语言ssh包
+ 2. 支持多线程
+ 3. 原生ssh协议支持，支持密码、证书认证
+ 4. 支持超时（各种密码错误，内存爆，网络不通，登录异常不能登录情况，不会中断批量执行）
+ 5. 支持发送电子邮件告知执行结果
+ 6. 采用ssh做认证，更安全
+ 7. 内存占用少
+ 8. 支持不同机器同时执行不同命令或者同台机器同时执行不同命令
+ 9. 执行速度非常快
+ 10. 可以自定义超时时间
+ 11. 支持配置文件和命令行选项
 
 ##3、mssh用法
 
 ###3.1
-./mssh -h 或者 ./mssh --help 或者 ./mssh help 查看命令帮助信息
-mssh is a tool for batching ssh execute commands.
+
+> ./mssh -h 或者 ./mssh --help 或者 ./mssh help 查看命令帮助信息 
+mssh is a tool for batching ssh execute commands. 
 Usage:
+> 
+>      mssh [command] [options] [arguments]
+> 
+> The commands are:
+> 
+>      mssh version
+> 
+>      mssh help
 
-     mssh [command] [options] [arguments]
 
-The commands are:
-     mssh version
+> The options are:
 
-     mssh help
-
-
-The options are:
      -f     input file(include ip|username|password|cmd)
      -cmd   shell cmds or shell scripts  
      -cfg   mssh config file default for mssh.conf
@@ -51,8 +56,10 @@ The options are:
      -m     send mail switch default for false
      -v     show details
 
-The arguments are:
+> The arguments are:
+
      The arguments of mssh will be passed to option cmd, will be part of cmd.
+     
      etc:
      mssh -f file1 -cmd ls /etc /home /root  --> ok
      mssh -f file1 -cmd ls -al /etc /home --> bad (-al will be dealed with mssh's option, result in undefined option)
@@ -60,8 +67,8 @@ The arguments are:
      mssh -f file1 -cmd tmp.sh -s -m  --> ok (exec shell scripts)
      ....
      more info wait for you to explore!
-
-For any bugs, please contact xuewuhen2015@gmail.com.
+> 
+> For any bugs, please contact xuewuhen2015@gmail.com.
 
 ###3.2
 ./mssh version 查看版本信息
@@ -71,7 +78,9 @@ Copyright @2014 xuewuhen
 Report bugs to https://github.com/xuewuhen/mssh
 
 ###3.3
-程序所有选项如下:
+
+> 程序所有选项如下:
+
 -f     input file(include ip|username|password|cmd)
 -cmd      shell cmds or shell scripts   cdf
 -cfg     mssh config file default for mssh.conf
@@ -220,6 +229,7 @@ file 文件格式5
 10.1.1.4 root
 
 如果相关字段missing，那么将会使用配置文件的配置。
+
 如：file 文件格式5 中 10.1.1.3 用户名、用户名密码、命令missing，
 那么对应默认值为10.1.1.3 root rootpass echo ok
 
@@ -251,12 +261,8 @@ run time: 301.368036ms
 
 ##5、安装mssh
 
-配置go环境
-go get -u github.com/xuewuhen/mssh
-mkdir $GOPATH/src/crypto.go
-mv ssh $GOPATH/src/crypto.go/
-go install or go build 
-
-
-
-
+ - 配置go环境
+ - go get -u github.com/xuewuhen/mssh
+ - mkdir $GOPATH/src/crypto.go
+ - mv ssh $GOPATH/src/crypto.go/
+ - go install or go build
